@@ -1,0 +1,19 @@
+WINDOW_WIDTH = 1536
+WINDOW_HEIGHT = 1024
+FPS = 60
+
+# Sizes
+ICON_SIZE = 32
+BUILDING_SIZE = 128
+# Размеры UI-кнопок
+BUTTON_LARGE_SIZE = (350, 70)
+BUTTON_SIZE = 48   # или любой размер, который тебе подходит
+
+BUTTON_SMALL_SIZE = (200, 50)
+BUTTON_MINI_SIZE = (64, 64)
+
+BUTTON_SMALL = (140, 40)
+BUTTON_LARGE = (200, 60)
+BUTTON_MINI = (64, 64)
+
+WHITE = (255, 255, 255)

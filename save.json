@@ -1,0 +1,39 @@
+{
+  "resources": {
+    "materials": 19.5,
+    "food": 28.59000000000408,
+    "water": 38.82499999999836,
+    "energy": 8.334999999999226,
+    "population": 5
+  },
+  "buildings": [
+    {
+      "type": "solar_panel",
+      "grid_x": 6,
+      "grid_y": 1,
+      "level": 1
+    },
+    {
+      "type": "greenhouse",
+      "grid_x": 7,
+      "grid_y": 1,
+      "level": 1
+    },
+    {
+      "type": "water_extractor",
+      "grid_x": 6,
+      "grid_y": 2,
+      "level": 1
+    },
+    {
+      "type": "solar_panel",
+      "grid_x": 7,
+      "grid_y": 2,
+      "level": 1
+    }
+  ],
+  "state": {
+    "first_goal": false,
+    "show_hint": false
+  }
+}
