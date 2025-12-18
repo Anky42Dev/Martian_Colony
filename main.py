@@ -3,6 +3,7 @@ import os
 
 from ui.menu import MainMenu
 from game import Game
+import os, sys
 
 pygame.init()
 pygame.mixer.init()

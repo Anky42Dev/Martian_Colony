@@ -9,9 +9,7 @@ class QuestManager:
         self.queue = []
 
     def add_quest(self, quest_id, text, condition):
-        """
-        condition — функция, которая возвращает True, когда квест выполнен
-        """
+
         self.queue.append({
             "id": quest_id,
             "text": text,

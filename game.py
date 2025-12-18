@@ -25,6 +25,23 @@ class Game:
         self.height = height
 
         self.clock = pygame.time.Clock()
+        # при гибели
+        # кнопка рестарта при гибели
+        restart_path = "assets/ui/btn_new_game.png"  # или твой путь
+        self.restart_img = pygame.image.load(restart_path).convert_alpha()
+
+        # hover‑версия (если хочешь подсветку)
+        self.restart_img_hover = self.restart_img.copy()
+        glow = pygame.Surface(self.restart_img_hover.get_size(), pygame.SRCALPHA)
+        glow.fill((255, 255, 255, 60))
+        self.restart_img_hover.blit(glow, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+
+        # позиция кнопки
+        self.restart_btn_rect = self.restart_img.get_rect(
+            center=(self.width // 2, self.height // 2 + 80)
+        )
+
+        self.restart_hover = False
 
         # ---- базовые параметры ----
         self.shop_width = 320
@@ -167,6 +184,18 @@ class Game:
     # Обработка событий
     # ============================================================
     def handle_event(self, event):
+        # hover для кнопки рестарта (когда колония мертва)
+        if self.state.state == "dead":
+            self.restart_hover = self.restart_btn_rect.collidepoint(
+                event.pos) if event.type == pygame.MOUSEMOTION else self.restart_hover
+        # если колония погибла — работает только кнопка рестарта
+        if self.state.state == "dead":
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if self.restart_btn_rect.collidepoint(event.pos):
+                    self.reset_game()
+                    return
+            return
+
         if event.type == pygame.MOUSEMOTION:
             self.grid.update_hover(event.pos)
             self.shop.handle_mouse_motion(event.pos)
@@ -315,8 +344,19 @@ class Game:
             overlay = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
             overlay.fill((0, 0, 0, 180))
             self.screen.blit(overlay, (0, 0))
+
+            # текст
             txt = self.font.render("Колония погибла...", True, (255, 80, 80))
-            self.screen.blit(txt, (self.width // 2 - txt.get_width() // 2, self.height // 2))
+            self.screen.blit(txt, (self.width // 2 - txt.get_width() // 2, self.height // 2 - 40))
+
+            # кнопка рестарта
+            if self.restart_hover:
+                self.screen.blit(self.restart_img_hover, self.restart_btn_rect.topleft)
+            else:
+                self.screen.blit(self.restart_img, self.restart_btn_rect.topleft)
+
+            return  # важно: не рисуем остальной UI
+
             self._draw_upgrade_window()
     def _draw_click_particles(self):
         for p in self.click_particles:

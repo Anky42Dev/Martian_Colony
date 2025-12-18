@@ -119,7 +119,7 @@
       "base_price": { "materials": 60 },
       "price_growth": 1.25,
       "production": {
-        "population": 0.0
+        "population": 0.05
       },
       "consumption": {
         "food": 0.01,
